@@ -1,0 +1,22 @@
+{
+  "name": "@lianhai/fast-db",
+  "version": "0.0.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-redis": "node test_redis.js",
+    "test-mysql": "node test_mysql.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "change-case": "^4.1.1",
+    "moment": "^2.26.0",
+    "mysql": "^2.18.1",
+    "pify": "^5.0.0",
+    "redis": "^3.0.2",
+    "util": "^0.12.3"
+  }
+}
