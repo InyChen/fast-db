@@ -68,6 +68,20 @@ proto.beginTransaction = async function () {
 };
 
 /**
+ * 执行一个事务
+ */
+proto.execTransaction = async function (callback) {
+  const tran = await this.beginTransaction();
+  try {
+    const rs = await callback(tran);
+    await tran.commit();
+    return rs;
+  } catch (err) {
+    await tran.rollback();
+  }
+}
+
+/**
  * Auto commit or rollback on a transaction scope
  *
  * @param {Function} scope - scope with code
