@@ -41,13 +41,19 @@ function RedisClient(config, options = {}) {
   }
 
   /** 普通的设置键值 */
-  this.set = async (key, value) => {
+  this.set = async (key, value,expire) => {
+    if(expire){
+      return await sendCommand("SET", key, seriate(value), "PX", expire)
+    }
     return await sendCommand("SET", key, seriate(value))
   }
 
-  /** 设置键值和过期时间 */
+  /** 目标键值存在时设置成功 */
   this.setEX = async (key, value, expire) => {
-    return await sendCommand("SET", key, seriate(value), "PX", expire)
+    if (expire) {
+      return await sendCommand("SET", key, seriate(value), "PX", expire, "EX")
+    }
+    return await sendCommand("SET", key, seriate(value), "EX")
   }
 
   /** 目标键值不存在时设置成功 */
