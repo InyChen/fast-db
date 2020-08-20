@@ -78,6 +78,12 @@ function RedisClient(config, options = {}) {
     return rs == 1;
   }
 
+  /** 删除目标键 */
+  this.delete = async key=>{
+    const rs = await sendCommand("DEL", key);
+    return rs;
+  }
+
   // 映射所有其他对象
   Object.keys(client).forEach(key=>{
     if(!this[key]){
